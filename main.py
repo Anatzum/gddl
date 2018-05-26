@@ -17,13 +17,13 @@ class Application(tk.Frame):
         self.download_link.grid(row=0, column=1, padx=10)
         self.destination_label = tk.Label(self, text="Destination: ")
         self.destination_label.grid(row=1, column=0, pady=10, padx=10)
-        self.browse_directory = tk.Button(self, text="Browse", command=self.browse_directory, width=18)
-        self.browse_directory.grid(row=1, column=1, padx=10)
+        self.browse_directory_btn = tk.Button(self, text="Browse", command=self.browse_directory, width=18)
+        self.browse_directory_btn.grid(row=1, column=1, padx=10)
         self.status = tk.Label(self, text="")
         self.status.grid(row=2, columnspan=2, pady=10)
         self.start = tk.Button(self, text="START", fg="red",
                                command=self.start_download)
-        self.start.grid(row=3, columnspan=2, pady=15)
+        self.start.grid(row=3, columnspan=2, pady=15)        
 
     def browse_directory(self):
         self.directory = filedialog.askdirectory()
