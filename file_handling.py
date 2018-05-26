@@ -4,15 +4,21 @@ import magic
 import zipfile
 
 
-def handle(file_location, directory):
-    types_dict = {"RAR archive data": extract_rar,
-                  "Zip archive data": extract_zip}
-    ftype = magic.from_file(file_location).split(',')[0]
+def get_file_type(file_location):
+    return magic.from_file(file_location).split(',')[0]
 
-    if ftype in types_dict:
-        types_dict[ftype](file_location, directory)
+
+def is_archive(file_location):
+    ftype = get_file_type(file_location)
+
+    if ftype in archives_dict:
+        return True
     else:
-        pass
+        return False
+
+
+def extract(file_location, directory):
+    archives_dict[get_file_type(file_location)](file_location, directory)
 
 
 def extract_rar(file_location, directory):
@@ -27,5 +33,14 @@ def extract_zip(file_location, directory):
         remove_file(file_location)
 
 
+def extract_tar(file_location, directory):
+    pass
+
+
 def remove_file(file_location):
     os.remove(file_location)
+
+
+archives_dict = {"RAR archive data": extract_rar,
+                 "Zip archive data": extract_zip,
+                 "POSIX tar archive": extract_tar}

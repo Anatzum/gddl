@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import filedialog
+from tkinter import dialog
 import gddl
 import file_handling
 
@@ -29,12 +30,20 @@ class Application(tk.Frame):
         self.directory = filedialog.askdirectory()
         self.location = self.directory + "/downloadfile"
 
+    def ask(title, text, strings=('Yes', 'No'), bitmap='questhead', default=0):
+        d = dialog.Dialog(
+            title=title, text=text, bitmap=bitmap, default=default, strings=strings)
+        return strings[d.num]
+
     def start_download(self):
         self.clean_link()
         self.update_status(0)
         gddl.download_file_from_google_drive(self.file_id, self.location)
-        self.update_status(1)
-        file_handling.handle(self.location, self.directory)
+        if file_handling.is_archive(self.location) is True:
+            response = self.ask("Do you want to extract the data?")
+            if response is "Yes":
+                self.update_status(1)
+                file_handling.extract(self.location, self.directory)
         self.update_status(2)
 
     def clean_link(self):
