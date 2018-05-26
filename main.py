@@ -23,7 +23,7 @@ class Application(tk.Frame):
         self.status.grid(row=2, columnspan=2, pady=10)
         self.start = tk.Button(self, text="START", fg="red",
                                command=self.start_download)
-        self.start.grid(row=3, columnspan=2, pady=15)        
+        self.start.grid(row=3, columnspan=2, pady=15)
 
     def browse_directory(self):
         self.directory = filedialog.askdirectory()
