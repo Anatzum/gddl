@@ -8,4 +8,4 @@ Right now only .rar files work and will extract the contents into the folder and
 
 TODO:
 Make the program content aware so that any type of file you download will be handled correctly and if it is a compressed format,
-ask the user if extraction should happen or not.
+ask the user if extraction should happen or not..
